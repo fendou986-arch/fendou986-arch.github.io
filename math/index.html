@@ -240,11 +240,14 @@
           <a href="#small">02 无穷小</a>
           <a href="#continuous">03 连续与逼近</a>
           <a href="#derivative">04 导数</a>
+          <a href="#differential">05 微分</a>
+          <a href="#indefinite">06 不定积分</a>
+          <a href="#definite">07 定积分</a>
         </aside>
 
         <div class="concept-flow">
           <section class="opening">
-            <p class="overline">当前主线 · 极限到导数</p>
+            <p class="overline">当前主线 · 极限到积分</p>
             <h1>先定误差，再找距离。</h1>
             <p>把“越来越近”翻译成可以逐句检查的数学语言，再把结论放进题目里。</p>
             <button class="primary-action" type="button" id="startPractice">开始分步练习</button>
@@ -270,7 +273,7 @@
                 <input id="epsilonRange" type="range" min="0.1" max="0.9" step="0.05" value="0.5" />
                 <p class="delta-readout">可取 δ=min{1, ε/3}=<strong id="deltaValue">0.167</strong></p>
               </article>
-            </div>
+        </div>
           </section>
 
           <section class="concept-section" id="small">
@@ -297,20 +300,48 @@
               <article class="concept-card"><header><strong>逼近</strong><span>最佳一阶系数</span></header><div><div class="formula">f(x₀+h)=f(x₀)+f′(x₀)h+o(h)。</div>误差 o(h) 相对 h 可忽略，微分正是函数增量的线性主部。</div></article>
             </div>
           </section>
+              <section class="concept-section" id="differential">
+            <div class="section-title"><span>05</span><div><h2>微分</h2><p>把增量拆成线性主部</p></div></div>
+            <div class="concept-stack">
+              <article class="concept-card"><header><strong>定义</strong><span>可微即线性逼近</span></header><div><div class="formula">Δy=f′(x₀)Δx+o(Δx)，记 dy=f′(x₀)dx。</div>一元函数：可微 ⇔ 可导。注意区分——导数 f′(x₀) 是一个数，微分 dy 是关于 dx 的线性函数。</div></article>
+              <article class="concept-card"><header><strong>用法</strong><span>先抓主项</span></header><div>增量不好算时，用线性主部代替：f(x₀+Δx)≈f(x₀)+f′(x₀)Δx。<div class="formula">√(1+x)≈1+x/2（x 很小时）。</div></div></article>
+            </div>
+          </section>
+
+          <section class="concept-section" id="indefinite">
+            <div class="section-title"><span>06</span><div><h2>不定积分</h2><p>求导的逆运算，答案自带 +C</p></div></div>
+            <div class="concept-stack">
+              <article class="concept-card"><header><strong>定义</strong><span>原函数的全体</span></header><div><div class="formula">F′(x)=f(x) ⇒ ∫f(x)dx=F(x)+C。</div>同一函数的原函数之间只差一个常数，所以不定积分的答案必须带 +C，漏写即错。</div></article>
+              <article class="concept-card"><header><strong>公式</strong><span>先背熟这几张牌</span></header><div><div class="formula">∫xⁿdx=xⁿ⁺¹/(n+1)+C（n≠−1）；∫dx/x=ln|x|+C；∫eˣdx=eˣ+C；∫sin x dx=−cos x+C；∫cos x dx=sin x+C；∫dx/(1+x²)=arctan x+C；∫dx/√(1−x²)=arcsin x+C。</div></div></article>
+              <article class="concept-card"><header><strong>方法</strong><span>三板斧</span></header><div><div class="formula">凑微分：∫f(φ(x))φ′(x)dx=∫f(u)du；分部积分：∫u dv=uv−∫v du。</div>凑微分是链式法则倒过来用；分部积分选 u 按“反对幂指三”排优先级；换元之后记得把变量换回来。</div></article>
+            </div>
+          </section>
+
+          <section class="concept-section" id="definite">
+            <div class="section-title"><span>07</span><div><h2>定积分</h2><p>无限细分、近似求和、取极限</p></div></div>
+            <div class="concept-stack">
+              <article class="concept-card"><header><strong>定义</strong><span>曲边梯形的精确面积</span></header><div><div class="formula">∫<sub>a</sub><sup>b</sup> f(x)dx=lim<sub>λ→0</sub> Σ f(ξᵢ)Δxᵢ。</div>切分→近似→求和→取极限四步；结果是一个数，不再是函数。</div></article>
+              <article class="concept-card"><header><strong>计算</strong><span>牛顿–莱布尼茨</span></header><div><div class="formula">∫<sub>a</sub><sup>b</sup> f(x)dx=F(b)−F(a)，其中 F′=f。</div>定积分的计算归结为找原函数；动手前先检查被积函数在积分区间上是否连续。</div></article>
+              <article class="concept-card"><header><strong>速算</strong><span>对称区间先看奇偶</span></header><div><div class="formula">[−a,a] 上：偶函数积分翻倍，奇函数积分为 0；d/dx ∫<sub>a</sub><sup>x</sup> f(t)dt=f(x)。</div>积分变量是哑变量，t 换成 u 结果不变；变限求导时，上限是 x，就把被积函数里的 t 换成 x。</div></article>
+            </div>
+          </section>
         </div>
       </div>
     </section>
 
     <section id="practice" class="view" role="tabpanel" hidden>
       <div class="practice-page">
-        <section class="page-intro"><p class="overline">八道分层题</p><h1>把思路写出来，再往下一步。</h1><p>手动输入答案，自动判定；答错只显示“不正确”，答对才解锁下一步。</p></section>
-        <div class="practice-note"><div><strong>逐步作答</strong><span>答案只在当前页面里判定，不会保存。</span></div><div class="progress-count"><span id="solvedCount">0 / 8</span></div></div>
+        <section class="page-intro"><p class="overline">十五道分层题</p><h1>把思路写出来，再往下一步。</h1><p>手动输入答案，自动判定；答错只显示“不正确”，答对才解锁下一步。</p></section>
+        <div class="practice-note"><div><strong>逐步作答</strong><span>答案只在当前页面里判定，不会保存。</span></div><div class="progress-count"><span id="solvedCount">0 / 15</span></div></div>
         <div class="progress-line" aria-hidden="true"><span id="progressFill"></span></div>
         <div class="filter-row" aria-label="题目分类">
           <button type="button" class="active" data-topic="all">全部</button>
           <button type="button" data-topic="limit">极限</button>
           <button type="button" data-topic="small">无穷小</button>
           <button type="button" data-topic="derivative">导数</button>
+          <button type="button" data-topic="differential">微分</button>
+          <button type="button" data-topic="integral">不定积分</button>
+          <button type="button" data-topic="definite">定积分</button>
         </div>
         <div class="exercise-list" id="exerciseList"></div>
       </div>
@@ -383,6 +414,62 @@
             { prompt: "写出从 4 到 4.04 的增量 h。", placeholder: "输入 h 的值", test: function (s) { return /0\.04/.test(s); } }
           ],
           solution: "<p>√4.04≈2+(1/4)×0.04=2.01。</p>"
+        },
+        {
+          id: "09", topic: "differential", topicLabel: "微分", level: "基础", title: "先写公式，再代入", question: "已知 y=x³，求 x=2、dx=0.1 时的微分 dy。",
+          steps: [
+            { prompt: "先写出微分的一般公式。", placeholder: "输入 dy 的公式", test: function (s) { return /dy=/.test(s) && /dx/.test(s); } },
+            { prompt: "代入 x=2、dx=0.1，算出 dy。", placeholder: "输入 dy 的值", test: function (s) { return /1\.2/.test(s); } }
+          ],
+          solution: "<p>dy=3x²dx；x=2 时 dy=12×0.1=1.2。</p>"
+        },
+        {
+          id: "10", topic: "differential", topicLabel: "微分", level: "进阶", title: "把微分变成估算工具", question: "用微分近似计算 √(1.02)，保留三位小数。",
+          steps: [
+            { prompt: "选一个好算的函数和基准点，写出线性近似式。", placeholder: "例如：√(1+x)≈…", test: function (s) { return /1\+x\/2/.test(s); } },
+            { prompt: "代入 x=0.02，写出近似值。", placeholder: "输入近似值", test: function (s) { return /1\.01/.test(s); } }
+          ],
+          solution: "<p>√(1+x)≈1+x/2；取 x=0.02，得 √(1.02)≈1.01。</p>"
+        },
+        {
+          id: "11", topic: "integral", topicLabel: "不定积分", level: "基础", title: "分项积分，别漏 +C", question: "求 ∫(2x + 1/x) dx。",
+          steps: [
+            { prompt: "分项后分别写出原函数（先不管 +C）。", placeholder: "输入两项的原函数", test: function (s) { return /x\^2/.test(s) && /ln\|x\|/.test(s); } },
+            { prompt: "补上积分常数，写出完整答案。", placeholder: "输入完整答案", test: function (s) { return /\+c/.test(s); } }
+          ],
+          solution: "<p>∫(2x+1/x)dx=x²+ln|x|+C。漏写 +C 即错。</p>"
+        },
+        {
+          id: "12", topic: "integral", topicLabel: "不定积分", level: "进阶", title: "凑微分", question: "求 ∫x·e^(x²) dx。",
+          steps: [
+            { prompt: "把 x dx 凑成 d(什么)。", placeholder: "输入 d(…)", test: function (s) { return /d\(x\^2\)/.test(s); } },
+            { prompt: "换元后积分并换回 x，写出答案（含 +C）。", placeholder: "输入完整答案", test: function (s) { return /1\/2/.test(s) && /e\^\(x\^2\)/.test(s); } }
+          ],
+          solution: "<p>xdx=½d(x²)，令 u=x²，原式=½∫eᵘdu=½e^(x²)+C。记得把变量换回来。</p>"
+        },
+        {
+          id: "13", topic: "definite", topicLabel: "定积分", level: "基础", title: "牛顿–莱布尼茨", question: "计算 ∫₀¹ x² dx。",
+          steps: [
+            { prompt: "先写出 x² 的一个原函数。", placeholder: "输入原函数", test: function (s) { return /x\^3\/3/.test(s); } },
+            { prompt: "代入上下限，写出定积分的值。", placeholder: "输入积分值", test: function (s) { return /(^|[^0-9])1\/3([^0-9]|$)/.test(s); } }
+          ],
+          solution: "<p>∫₀¹x²dx=[x³/3]₀¹=1/3。</p>"
+        },
+        {
+          id: "14", topic: "definite", topicLabel: "定积分", level: "进阶", title: "对称区间先看奇偶", question: "计算 ∫₋₁¹ x³ dx。",
+          steps: [
+            { prompt: "x³ 是奇函数还是偶函数？", placeholder: "输入奇或偶", test: function (s) { return /奇/.test(s) && !/偶/.test(s.replace(/奇偶/, "")); } },
+            { prompt: "写出积分值。", placeholder: "输入积分值", test: function (s) { return /^(0|0\.0+)$/.test(s); } }
+          ],
+          solution: "<p>x³ 是奇函数，在对称区间 [−1,1] 上的定积分为 0。</p>"
+        },
+        {
+          id: "15", topic: "definite", topicLabel: "定积分", level: "挑战", title: "变限积分求导", question: "设 F(x)=∫₀ˣ t² dt，求 F′(x)。",
+          steps: [
+            { prompt: "补全公式：d/dx ∫ₐˣ f(t) dt = ？", placeholder: "输入公式右边", test: function (s) { return /f\(x\)/.test(s); } },
+            { prompt: "把 f(t)=t² 代入，写出 F′(x)。", placeholder: "输入 F′(x)", test: function (s) { return /x\^2/.test(s); } }
+          ],
+          solution: "<p>F′(x)=x²。注意积分变量 t 是哑变量，求导时把上限 x 代回被积函数即可。</p>"
         }
       ];
 
